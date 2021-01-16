@@ -12,6 +12,10 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +35,12 @@ public class LoopNoSpecificOrder {
 	private int N;
 	
 	private List<String> DATA_FOR_TESTING = createData();
+	
+	public static void main(final String[] args) throws RunnerException {
+		final Options opt =
+				new OptionsBuilder().include(".*" + LoopNoSpecificOrder.class.getSimpleName() + ".*").forks(1).build();
+		new Runner(opt).run();
+	}
 	
 	@Setup
 	public void setup() {
@@ -127,8 +137,23 @@ public class LoopNoSpecificOrder {
 	}
 	
 	@Benchmark
-	public void collectionStream(final Blackhole bh) {
+	public void collectionForEach(final Blackhole bh) {
+		DATA_FOR_TESTING.forEach(s -> bh.consume(bh));
+	}
+	
+	@Benchmark
+	public void collectionForEachMethodRef(final Blackhole bh) {
+		DATA_FOR_TESTING.forEach(bh::consume);
+	}
+	
+	@Benchmark
+	public void collectionStreamForEach(final Blackhole bh) {
 		DATA_FOR_TESTING.stream().forEach(s -> bh.consume(s));
+	}
+	
+	@Benchmark
+	public void collectionStreamForEachMethodRef(final Blackhole bh) {
+		DATA_FOR_TESTING.stream().forEach(bh::consume);
 	}
 	
 	@Benchmark
@@ -138,62 +163,94 @@ public class LoopNoSpecificOrder {
 	}
 	
 	@Benchmark
+	public void collectionStreamParallelIndirectMethodRef(final Blackhole bh) {
+		// not in order!
+		DATA_FOR_TESTING.stream().parallel().forEach(bh::consume);
+	}
+	
+	@Benchmark
 	public void collectionStreamParallelDirect(final Blackhole bh) {
 		// not in order!
 		DATA_FOR_TESTING.parallelStream().forEach(s -> bh.consume(s));
+	}
+	
+	@Benchmark
+	public void collectionStreamParallelDirectMethodRef(final Blackhole bh) {
+		// not in order!
+		DATA_FOR_TESTING.parallelStream().forEach(bh::consume);
 	}
 	
 }
 
 /*
 JDK 16-ea
-Benchmark                                                  (N)  Mode  Cnt          Score         Error  Units
-LoopNoSpecificOrder.forwardWhileAlt                          1  avgt    3          4,129 ±       0,032  ns/op
-LoopNoSpecificOrder.forwardForAlt                            1  avgt    3          4,142 ±       0,235  ns/op
-LoopNoSpecificOrder.reverseFor                               1  avgt    3          4,341 ±       0,149  ns/op
-LoopNoSpecificOrder.reverseWhile                             1  avgt    3          4,349 ±       0,171  ns/op
-LoopNoSpecificOrder.reverseWhileAlt                          1  avgt    3          4,437 ±       2,522  ns/op
-LoopNoSpecificOrder.forwardWhile                             1  avgt    3          4,602 ±       3,463  ns/op
-LoopNoSpecificOrder.forwardFor                               1  avgt    3          4,604 ±       1,070  ns/op
-LoopNoSpecificOrder.loopIterator                             1  avgt    3          4,697 ±       0,496  ns/op
-LoopNoSpecificOrder.loopForEach                              1  avgt    3          5,199 ±       1,661  ns/op
-LoopNoSpecificOrder.collectionStream                         1  avgt    3         13,524 ±       0,610  ns/op
-LoopNoSpecificOrder.collectionStreamParallelDirect           1  avgt    3         31,820 ±       0,924  ns/op
-LoopNoSpecificOrder.collectionStreamParallelIndirect         1  avgt    3         32,568 ±       2,810  ns/op
-LoopNoSpecificOrder.reverseWhileAlt                         10  avgt    3         34,733 ±       0,372  ns/op
-LoopNoSpecificOrder.reverseWhile                            10  avgt    3         34,805 ±       1,134  ns/op
-LoopNoSpecificOrder.reverseFor                              10  avgt    3         34,825 ±       0,931  ns/op
-LoopNoSpecificOrder.forwardWhileAlt                         10  avgt    3         36,051 ±       2,260  ns/op
-LoopNoSpecificOrder.forwardForAlt                           10  avgt    3         36,411 ±       0,990  ns/op
-LoopNoSpecificOrder.forwardWhile                            10  avgt    3         37,475 ±       1,744  ns/op
-LoopNoSpecificOrder.loopIterator                            10  avgt    3         37,543 ±       0,463  ns/op
-LoopNoSpecificOrder.loopForEach                             10  avgt    3         37,835 ±       1,939  ns/op
-LoopNoSpecificOrder.forwardFor                              10  avgt    3         37,900 ±       3,445  ns/op
-LoopNoSpecificOrder.collectionStream                        10  avgt    3         38,290 ±       0,195  ns/op
-LoopNoSpecificOrder.collectionStreamParallelDirect          10  avgt    3      16053,994 ±    2625,870  ns/op
-LoopNoSpecificOrder.collectionStreamParallelIndirect        10  avgt    3      16555,019 ±     768,306  ns/op
-LoopNoSpecificOrder.collectionStream                       100  avgt    3        309,164 ±      18,400  ns/op
-LoopNoSpecificOrder.reverseWhile                           100  avgt    3        346,929 ±       9,719  ns/op
-LoopNoSpecificOrder.reverseWhileAlt                        100  avgt    3        347,170 ±       7,475  ns/op
-LoopNoSpecificOrder.reverseFor                             100  avgt    3        347,236 ±       7,451  ns/op
-LoopNoSpecificOrder.forwardForAlt                          100  avgt    3        359,814 ±       8,723  ns/op
-LoopNoSpecificOrder.loopForEach                            100  avgt    3        372,037 ±       6,450  ns/op
-LoopNoSpecificOrder.loopIterator                           100  avgt    3        373,660 ±       2,532  ns/op
-LoopNoSpecificOrder.forwardWhile                           100  avgt    3        395,812 ±      11,594  ns/op
-LoopNoSpecificOrder.forwardFor                             100  avgt    3        396,860 ±       1,819  ns/op
-LoopNoSpecificOrder.forwardWhileAlt                        100  avgt    3        414,047 ±      22,294  ns/op
-LoopNoSpecificOrder.collectionStreamParallelDirect         100  avgt    3      26350,370 ±    2479,448  ns/op
-LoopNoSpecificOrder.collectionStreamParallelIndirect       100  avgt    3      26592,532 ±     736,482  ns/op
-LoopNoSpecificOrder.reverseWhile                      10000000  avgt    3   49982747,589 ± 2257380,576  ns/op
-LoopNoSpecificOrder.reverseWhileAlt                   10000000  avgt    3   50157309,500 ± 1131304,606  ns/op
-LoopNoSpecificOrder.reverseFor                        10000000  avgt    3   50328926,631 ±  286532,052  ns/op
-LoopNoSpecificOrder.forwardForAlt                     10000000  avgt    3   51846443,018 ± 4405068,263  ns/op
-LoopNoSpecificOrder.forwardWhileAlt                   10000000  avgt    3   51872612,504 ± 1730461,053  ns/op
-LoopNoSpecificOrder.loopForEach                       10000000  avgt    3   53540329,347 ± 2152381,249  ns/op
-LoopNoSpecificOrder.collectionStream                  10000000  avgt    3   53666342,903 ± 3165920,476  ns/op
-LoopNoSpecificOrder.forwardFor                        10000000  avgt    3   54289124,766 ± 2035623,515  ns/op
-LoopNoSpecificOrder.forwardWhile                      10000000  avgt    3   54785233,384 ± 4169770,078  ns/op
-LoopNoSpecificOrder.loopIterator                      10000000  avgt    3   56913099,728 ± 6345699,526  ns/op
-LoopNoSpecificOrder.collectionStreamParallelDirect    10000000  avgt    3  131993394,116 ± 8213786,959  ns/op
-LoopNoSpecificOrder.collectionStreamParallelIndirect  10000000  avgt    3  140527012,963 ± 2586567,141  ns/op
+Benchmark                                                           (N)  Mode  Cnt          Score         Error  Units
+LoopNoSpecificOrder.forwardWhileAlt                                   1  avgt    3          4,185 ±       0,082  ns/op
+LoopNoSpecificOrder.reverseWhileAlt                                   1  avgt    3          4,406 ±       0,087  ns/op
+LoopNoSpecificOrder.reverseFor                                        1  avgt    3          4,412 ±       0,060  ns/op
+LoopNoSpecificOrder.reverseWhile                                      1  avgt    3          4,412 ±       0,030  ns/op
+LoopNoSpecificOrder.forwardForAlt                                     1  avgt    3          4,535 ±       0,101  ns/op
+LoopNoSpecificOrder.forwardWhile                                      1  avgt    3          4,554 ±       0,037  ns/op
+LoopNoSpecificOrder.forwardFor                                        1  avgt    3          4,571 ±       0,387  ns/op
+LoopNoSpecificOrder.loopForEach                                       1  avgt    3          4,805 ±       0,510  ns/op
+LoopNoSpecificOrder.loopIterator                                      1  avgt    3          4,887 ±       0,159  ns/op
+LoopNoSpecificOrder.collectionForEach                                 1  avgt    3          5,064 ±       0,294  ns/op
+LoopNoSpecificOrder.collectionForEachMethodRef                        1  avgt    3          5,567 ±       0,215  ns/op
+LoopNoSpecificOrder.collectionStreamForEach                           1  avgt    3         11,940 ±       0,436  ns/op
+LoopNoSpecificOrder.collectionStreamForEachMethodRef                  1  avgt    3         12,157 ±       0,147  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirect                  1  avgt    3         31,369 ±       0,340  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirect                    1  avgt    3         31,410 ±       7,041  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirectMethodRef         1  avgt    3         31,842 ±       0,846  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirectMethodRef           1  avgt    3         31,968 ±       0,273  ns/op
+LoopNoSpecificOrder.reverseFor                                       10  avgt    3         35,347 ±       3,480  ns/op
+LoopNoSpecificOrder.reverseWhileAlt                                  10  avgt    3         35,444 ±       2,591  ns/op
+LoopNoSpecificOrder.reverseWhile                                     10  avgt    3         35,553 ±       1,844  ns/op
+LoopNoSpecificOrder.forwardForAlt                                    10  avgt    3         36,370 ±       0,059  ns/op
+LoopNoSpecificOrder.forwardWhileAlt                                  10  avgt    3         36,448 ±       0,581  ns/op
+LoopNoSpecificOrder.forwardWhile                                     10  avgt    3         37,684 ±       0,579  ns/op
+LoopNoSpecificOrder.forwardFor                                       10  avgt    3         37,858 ±       1,318  ns/op
+LoopNoSpecificOrder.loopForEach                                      10  avgt    3         38,094 ±       1,483  ns/op
+LoopNoSpecificOrder.loopIterator                                     10  avgt    3         38,530 ±       6,117  ns/op
+LoopNoSpecificOrder.collectionStreamForEach                          10  avgt    3         38,644 ±       0,604  ns/op
+LoopNoSpecificOrder.collectionStreamForEachMethodRef                 10  avgt    3         38,677 ±       0,397  ns/op
+LoopNoSpecificOrder.collectionForEach                                10  avgt    3         39,779 ±       0,667  ns/op
+LoopNoSpecificOrder.collectionForEachMethodRef                       10  avgt    3         40,620 ±       0,598  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirect                   10  avgt    3      15977,920 ±    2658,242  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirectMethodRef          10  avgt    3      16280,243 ±     494,502  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirect                 10  avgt    3      16464,259 ±    1278,352  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirectMethodRef        10  avgt    3      16485,050 ±     327,396  ns/op
+LoopNoSpecificOrder.collectionStreamForEachMethodRef                100  avgt    3        311,575 ±      16,829  ns/op
+LoopNoSpecificOrder.collectionStreamForEach                         100  avgt    3        312,161 ±       7,682  ns/op
+LoopNoSpecificOrder.reverseFor                                      100  avgt    3        352,007 ±       2,142  ns/op
+LoopNoSpecificOrder.reverseWhile                                    100  avgt    3        352,478 ±       6,728  ns/op
+LoopNoSpecificOrder.reverseWhileAlt                                 100  avgt    3        356,232 ±     135,238  ns/op
+LoopNoSpecificOrder.forwardForAlt                                   100  avgt    3        365,538 ±      36,377  ns/op
+LoopNoSpecificOrder.forwardWhileAlt                                 100  avgt    3        366,788 ±      25,378  ns/op
+LoopNoSpecificOrder.loopIterator                                    100  avgt    3        377,933 ±      11,732  ns/op
+LoopNoSpecificOrder.loopForEach                                     100  avgt    3        378,146 ±       9,825  ns/op
+LoopNoSpecificOrder.collectionForEachMethodRef                      100  avgt    3        399,564 ±       4,714  ns/op
+LoopNoSpecificOrder.collectionForEach                               100  avgt    3        401,223 ±       1,970  ns/op
+LoopNoSpecificOrder.forwardFor                                      100  avgt    3        401,979 ±      12,245  ns/op
+LoopNoSpecificOrder.forwardWhile                                    100  avgt    3        402,897 ±      23,894  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirect                  100  avgt    3      25895,179 ±    2294,616  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirectMethodRef         100  avgt    3      26312,096 ±     682,350  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirect                100  avgt    3      26430,941 ±    1637,360  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirectMethodRef       100  avgt    3      26504,734 ±    1344,912  ns/op
+LoopNoSpecificOrder.reverseWhileAlt                            10000000  avgt    3   50811785,556 ± 2068188,816  ns/op
+LoopNoSpecificOrder.reverseWhile                               10000000  avgt    3   50833722,225 ± 1654666,462  ns/op
+LoopNoSpecificOrder.reverseFor                                 10000000  avgt    3   50857318,311 ± 1124578,512  ns/op
+LoopNoSpecificOrder.forwardForAlt                              10000000  avgt    3   52236841,493 ± 1657947,922  ns/op
+LoopNoSpecificOrder.forwardWhileAlt                            10000000  avgt    3   52464262,486 ± 1542932,652  ns/op
+LoopNoSpecificOrder.loopIterator                               10000000  avgt    3   53972854,480 ±  494892,477  ns/op
+LoopNoSpecificOrder.loopForEach                                10000000  avgt    3   53996990,860 ± 2063649,080  ns/op
+LoopNoSpecificOrder.collectionStreamForEachMethodRef           10000000  avgt    3   54496452,717 ±  688540,991  ns/op
+LoopNoSpecificOrder.collectionStreamForEach                    10000000  avgt    3   54551796,739 ±  830282,627  ns/op
+LoopNoSpecificOrder.forwardWhile                               10000000  avgt    3   55134116,300 ±  402061,945  ns/op
+LoopNoSpecificOrder.forwardFor                                 10000000  avgt    3   55385944,015 ± 1759556,097  ns/op
+LoopNoSpecificOrder.collectionForEachMethodRef                 10000000  avgt    3   60661561,564 ± 1046867,557  ns/op
+LoopNoSpecificOrder.collectionForEach                          10000000  avgt    3   60712849,898 ± 1128186,723  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirectMethodRef  10000000  avgt    3  131716748,246 ± 1905555,241  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirectMethodRef    10000000  avgt    3  138204793,151 ± 1280369,513  ns/op
+LoopNoSpecificOrder.collectionStreamParallelDirect             10000000  avgt    3  139293820,028 ± 8171583,508  ns/op
+LoopNoSpecificOrder.collectionStreamParallelIndirect           10000000  avgt    3  151948654,545 ± 8486858,414  ns/op
 */

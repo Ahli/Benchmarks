@@ -10,6 +10,11 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -27,26 +32,41 @@ public class RandomDouble {
 	private final Random random = new Random();
 	private final SecureRandom secureRandom = new SecureRandom();
 	
-	@Benchmark
-	public void measureRandom() {
-		random.nextDouble();
+	public static void main(final String[] args) throws RunnerException {
+		final Options opt =
+				new OptionsBuilder().include(".*" + RandomDouble.class.getSimpleName() + ".*").forks(1).build();
+		new Runner(opt).run();
 	}
 	
 	@Benchmark
-	public void measureSecureRandom() {
-		secureRandom.nextDouble();
+	public void randomObj(final Blackhole bh) {
+		final double i = random.nextDouble();
+		bh.consume(i);
 	}
 	
 	@Benchmark
-	public void measureThreadLocal() {
-		ThreadLocalRandom.current().nextDouble();
+	public void secureRandomObj(final Blackhole bh) {
+		final double i = secureRandom.nextDouble();
+		bh.consume(i);
+	}
+	
+	@Benchmark
+	public void threadLocal(final Blackhole bh) {
+		final double i = ThreadLocalRandom.current().nextDouble();
+		bh.consume(i);
+	}
+	
+	@Benchmark
+	public void mathRandom(final Blackhole bh) {
+		final double i = Math.random();
+		bh.consume(i);
 	}
 }
 
 /*
 JDK 16-ea
-Benchmark                         Mode  Cnt     Score   Error  Units
-RandomDouble.measureRandom        avgt    6    16,959 ± 0,236  ns/op
-RandomDouble.measureSecureRandom  avgt    6  1607,737 ± 6,814  ns/op
-RandomDouble.measureThreadLocal   avgt    6     1,205 ± 0,012  ns/op <<<
+RandomDouble.threadLocal      avgt    6     4,195 ±  0,093  ns/op
+RandomDouble.randomObj        avgt    6    16,987 ±  0,386  ns/op
+RandomDouble.mathRandom       avgt    6    17,117 ±  0,112  ns/op
+RandomDouble.secureRandomObj  avgt    6  1624,399 ± 47,418  ns/op
 */

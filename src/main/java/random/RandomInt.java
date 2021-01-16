@@ -10,6 +10,11 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -24,29 +29,47 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @Threads(1)
 public class RandomInt {
+	private static final int BOUND = 100;
+	private static final int BOUND_MINUS_ONE = BOUND - 1;
 	private final Random random = new Random();
 	private final SecureRandom secureRandom = new SecureRandom();
 	
-	@Benchmark
-	public void measureRandom() {
-		random.nextInt();
+	public static void main(final String[] args) throws RunnerException {
+		final Options opt =
+				new OptionsBuilder().include(".*" + RandomInt.class.getSimpleName() + ".*").forks(1).build();
+		new Runner(opt).run();
 	}
 	
 	@Benchmark
-	public void measureSecureRandom() {
-		secureRandom.nextInt();
+	public void randomObj(final Blackhole bh) {
+		final int i = random.nextInt(BOUND);
+		bh.consume(i);
 	}
 	
 	@Benchmark
-	public void measureThreadLocal() {
-		ThreadLocalRandom.current().nextInt();
+	public void secureRandomObj(final Blackhole bh) {
+		final int i = secureRandom.nextInt(BOUND);
+		bh.consume(i);
+	}
+	
+	@Benchmark
+	public void threadLocal(final Blackhole bh) {
+		final int i = ThreadLocalRandom.current().nextInt(BOUND);
+		bh.consume(i);
+	}
+	
+	@Benchmark
+	public void mathRandom(final Blackhole bh) {
+		final int i = (int) (Math.random() * BOUND_MINUS_ONE);
+		bh.consume(i);
 	}
 }
 
 /*
 JDK 16-ea
-Benchmark                      Mode  Cnt    Score    Error  Units
-RandomInt.measureRandom        avgt    6    8,449 ±  0,039  ns/op
-RandomInt.measureSecureRandom  avgt    6  798,021 ± 12,846  ns/op
-RandomInt.measureThreadLocal   avgt    6    1,204 ±  0,019  ns/op <<<
+Benchmark                  Mode  Cnt    Score    Error  Units
+RandomInt.threadLocal      avgt    6    4,087 ±  0,014  ns/op
+RandomInt.randomObj        avgt    6    8,601 ±  0,118  ns/op
+RandomInt.mathRandom       avgt    6   17,225 ±  0,043  ns/op
+RandomInt.secureRandomObj  avgt    6  824,622 ± 33,149  ns/op
 */

@@ -13,7 +13,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<jmh.version>1.27</jmh.version>
-		<asm.version>9.0</asm.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +26,21 @@
 			<artifactId>jmh-generator-annprocess</artifactId>
 			<version>${jmh.version}</version>
 		</dependency>
+
+		<!-- update dependencies within JMH -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jopt-simple/jopt-simple -->
+		<dependency>
+			<groupId>net.sf.jopt-simple</groupId>
+			<artifactId>jopt-simple</artifactId>
+			<version>6.0-alpha-3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -57,7 +71,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 
 			<plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
@@ -135,17 +148,6 @@
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
-				<configuration>
-					<!--<argLine>&#45;&#45;enable-preview</argLine>-->
-				</configuration>
-				<dependencies>
-					<dependency>
-						<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
-						<groupId>org.ow2.asm</groupId>
-						<artifactId>asm</artifactId>
-						<version>${asm.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
