@@ -9,10 +9,10 @@
 	<version>0.1-SNAPSHOT</version>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>16</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<jmh.version>1.27</jmh.version>
+		<jmh.version>1.29</jmh.version>
 	</properties>
 
 	<dependencies>
