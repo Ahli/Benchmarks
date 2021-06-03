@@ -65,8 +65,9 @@ public class RandomDouble {
 
 /*
 JDK 16-ea
-RandomDouble.threadLocal      avgt    6     4,195 ±  0,093  ns/op
-RandomDouble.randomObj        avgt    6    16,987 ±  0,386  ns/op
-RandomDouble.mathRandom       avgt    6    17,117 ±  0,112  ns/op
-RandomDouble.secureRandomObj  avgt    6  1624,399 ± 47,418  ns/op
+Benchmark                     Mode  Cnt     Score    Error  Units
+RandomDouble.threadLocal      avgt    3     3,653 ±  0,095  ns/op
+RandomDouble.mathRandom       avgt    3    17,119 ±  0,128  ns/op
+RandomDouble.randomObj        avgt    3    17,240 ±  0,122  ns/op
+RandomDouble.secureRandomObj  avgt    3  1485,895 ± 63,098  ns/op
 */

@@ -66,10 +66,10 @@ public class RandomInt {
 }
 
 /*
-JDK 16-ea
+JDK 16
 Benchmark                  Mode  Cnt    Score    Error  Units
-RandomInt.threadLocal      avgt    6    4,087 ±  0,014  ns/op
-RandomInt.randomObj        avgt    6    8,601 ±  0,118  ns/op
-RandomInt.mathRandom       avgt    6   17,225 ±  0,043  ns/op
-RandomInt.secureRandomObj  avgt    6  824,622 ± 33,149  ns/op
+RandomInt.threadLocal      avgt    3    3,702 ±  0,578  ns/op
+RandomInt.randomObj        avgt    3    8,441 ±  1,870  ns/op
+RandomInt.mathRandom       avgt    3   17,432 ±  0,303  ns/op
+RandomInt.secureRandomObj  avgt    3  733,805 ± 93,730  ns/op
 */
