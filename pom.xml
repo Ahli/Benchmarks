@@ -95,6 +95,9 @@
 							<version>${jmh.version}</version>
 						</path>
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<compilerArg>-Xlint:all</compilerArg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 
