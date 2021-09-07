@@ -24,13 +24,13 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-@Warmup(iterations = 3)
-@Measurement(iterations = 3)
-@Fork(value = 2, jvmArgs = { "-Xms2G", "-Xmx2G" })
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
-@State(Scope.Benchmark)
+@Warmup(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1, jvmArgs = { "-Xms2G", "-Xmx2G" })
 @Threads(1)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.SECONDS)
+@State(Scope.Benchmark)
 public class UUIDCheck {
 	
 	private static final Pattern singleRegexPattern = Pattern.compile("([a-f0-9]{8}(-[a-f0-9]{4}){4}[a-f0-9]{8})");
@@ -50,7 +50,7 @@ public class UUIDCheck {
 	}
 	
 	private List<String> createData() {
-		final List<String> data = new ArrayList<>();
+		final List<String> data = new ArrayList<>(N);
 		for (int i = 0; i < N; ++i) {
 			data.add(UUID.randomUUID().toString());
 		}
@@ -86,8 +86,8 @@ public class UUIDCheck {
 	
 }
 /*
-JDK-16.0.1
-Benchmark               (N)  Mode  Cnt       Score       Error  Units
-UUIDCheck.parse        1000  avgt    3   46312,854 ± 10897,757  ns/op
-UUIDCheck.singleRegex  1000  avgt    3  434284,029 ± 50138,973  ns/op
+JDK-17
+Benchmark               (N)   Mode  Cnt      Score      Error  Units
+UUIDCheck.parse        1000  thrpt    3  21386,249 ± 1029,487  ops/s
+UUIDCheck.singleRegex  1000  thrpt    3   2477,466 ±   91,031  ops/s
 */

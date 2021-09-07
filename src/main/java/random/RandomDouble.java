@@ -21,13 +21,13 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 2, jvmArgs = { "-Xms2G", "-Xmx2G" })
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
-@State(Scope.Benchmark)
+@Fork(value = 1, jvmArgs = { "-Xms2G", "-Xmx2G" })
 @Threads(1)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.SECONDS)
+@State(Scope.Benchmark)
 public class RandomDouble {
 	private final Random random = new Random();
 	private final SecureRandom secureRandom = new SecureRandom();
@@ -64,10 +64,10 @@ public class RandomDouble {
 }
 
 /*
-JDK 16-ea
-Benchmark                     Mode  Cnt     Score    Error  Units
-RandomDouble.threadLocal      avgt    3     3,653 ±  0,095  ns/op
-RandomDouble.mathRandom       avgt    3    17,119 ±  0,128  ns/op
-RandomDouble.randomObj        avgt    3    17,240 ±  0,122  ns/op
-RandomDouble.secureRandomObj  avgt    3  1485,895 ± 63,098  ns/op
+JDK 17
+Benchmark                      Mode  Cnt          Score         Error  Units
+RandomDouble.mathRandom       thrpt    3   60104513,508 ±  385168,918  ops/s
+RandomDouble.randomObj        thrpt    3   60254504,016 ± 1499933,840  ops/s
+RandomDouble.secureRandomObj  thrpt    3     640035,457 ±   59971,996  ops/s
+RandomDouble.threadLocal      thrpt    3  182857277,962 ± 8434544,009  ops/s
 */
