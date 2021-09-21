@@ -76,20 +76,20 @@ public class ToArray {
 	}
 }
 /*
-JDK 16.0.2
+JDK 17 - laptop 12 cores
 Benchmark                (N)   Mode  Cnt          Score          Error  Units
-ToArray.emptyArray         1  thrpt    3   44596506,029 ±   595600,559  ops/s
-ToArray.emptyArray        10  thrpt    3   33685875,124 ±  1197181,005  ops/s
-ToArray.emptyArray       100  thrpt    3    8080389,571 ±   515073,490  ops/s
-ToArray.emptyArray  10000000  thrpt    3         38,516 ±       10,369  ops/s
-ToArray.index              1  thrpt    3  118764394,504 ± 10345921,155  ops/s
-ToArray.index             10  thrpt    3   33826427,991 ±   903213,417  ops/s
-ToArray.index            100  thrpt    3    3986502,479 ±    93172,484  ops/s
-ToArray.index       10000000  thrpt    3         12,675 ±        1,710  ops/s
-ToArray.sizedArray         1  thrpt    3   46492949,889 ±  1987804,195  ops/s
-ToArray.sizedArray        10  thrpt    3   34850723,725 ± 14272020,615  ops/s
-ToArray.sizedArray       100  thrpt    3    9623629,565 ±  1667650,561  ops/s
-ToArray.sizedArray  10000000  thrpt    3         38,880 ±        2,220  ops/s
+ToArray.emptyArray         1  thrpt    3   45171359,704 ±  3136610,804  ops/s
+ToArray.emptyArray        10  thrpt    3   36219163,913 ±  2094975,023  ops/s
+ToArray.emptyArray       100  thrpt    3   12832873,797 ±   620097,793  ops/s
+ToArray.emptyArray  10000000  thrpt    3         40,550 ±        5,673  ops/s
+ToArray.index              1  thrpt    3  115917232,831 ± 13391307,188  ops/s
+ToArray.index             10  thrpt    3   34110063,625 ±  1701185,573  ops/s
+ToArray.index            100  thrpt    3    3904734,260 ±   188596,897  ops/s
+ToArray.index       10000000  thrpt    3         13,252 ±        2,709  ops/s
+ToArray.sizedArray         1  thrpt    3   47141587,950 ±  2785563,991  ops/s
+ToArray.sizedArray        10  thrpt    3   36519212,175 ±  4637641,192  ops/s
+ToArray.sizedArray       100  thrpt    3   12585969,675 ±   546365,287  ops/s
+ToArray.sizedArray  10000000  thrpt    3         40,702 ±        7,521  ops/s
 
 https://shipilev.net/blog/2016/arrays-wisdom-ancients/
 => use zero array instead of sized array
