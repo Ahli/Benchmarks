@@ -66,10 +66,24 @@ public class RandomInt {
 }
 
 /*
-JDK 16.0.2
+JDK 16.0.2 - laptop 6+6 cores
 Benchmark                   Mode  Cnt          Score           Error  Units
 RandomInt.mathRandom       thrpt    3   59798407,359 ±   1525333,217  ops/s
 RandomInt.randomObj        thrpt    3  120296216,908 ±   1507199,492  ops/s
 RandomInt.secureRandomObj  thrpt    3    1258376,314 ±     29481,553  ops/s
 RandomInt.threadLocal      thrpt    3  229589836,545 ± 140921692,025  ops/s
+
+JDK 17 - desktop 4+4 cores
+Benchmark                   Mode  Cnt          Score           Error  Units
+RandomInt.mathRandom       thrpt    3   66340968,925 ±   2301364,616  ops/s
+RandomInt.randomObj        thrpt    3  130940510,779 ±  77147573,380  ops/s
+RandomInt.secureRandomObj  thrpt    3    1360249,247 ±     90740,665  ops/s
+RandomInt.threadLocal      thrpt    3  252509940,437 ± 167041711,256  ops/s
+
+JDK 18-ea+26 - desktop 4+4 cores
+Benchmark                   Mode  Cnt          Score           Error  Units
+RandomInt.mathRandom       thrpt    3   66437283,645 ±   2419059,806  ops/s
+RandomInt.randomObj        thrpt    3  128654811,271 ±  75993215,491  ops/s
+RandomInt.secureRandomObj  thrpt    3    1395814,309 ±     56318,045  ops/s
+RandomInt.threadLocal      thrpt    3  258730797,850 ± 103217057,845  ops/s
 */

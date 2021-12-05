@@ -86,8 +86,18 @@ public class UUIDCheck {
 	
 }
 /*
-JDK-17
+JDK-17 - laptop 6+6 cores
 Benchmark               (N)   Mode  Cnt      Score      Error  Units
 UUIDCheck.parse        1000  thrpt    3  21386,249 ± 1029,487  ops/s
 UUIDCheck.singleRegex  1000  thrpt    3   2477,466 ±   91,031  ops/s
+
+JDK-17 - desktop 4+4 cores
+Benchmark               (N)   Mode  Cnt      Score     Error  Units
+UUIDCheck.parse        1000  thrpt    3  28152,459 ± 841,852  ops/s
+UUIDCheck.singleRegex  1000  thrpt    3   2725,334 ±  13,362  ops/s
+
+JDK 18-ea+26 - desktop 4+4 cores
+Benchmark               (N)   Mode  Cnt      Score      Error  Units
+UUIDCheck.parse        1000  thrpt    3  31115,779 ± 1285,629  ops/s
+UUIDCheck.singleRegex  1000  thrpt    3   2913,940 ± 3501,117  ops/s
 */

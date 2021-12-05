@@ -64,10 +64,24 @@ public class RandomDouble {
 }
 
 /*
-JDK 17
+JDK 17 - laptop 6+6 cores
 Benchmark                      Mode  Cnt          Score         Error  Units
 RandomDouble.mathRandom       thrpt    3   60104513,508 ±  385168,918  ops/s
 RandomDouble.randomObj        thrpt    3   60254504,016 ± 1499933,840  ops/s
 RandomDouble.secureRandomObj  thrpt    3     640035,457 ±   59971,996  ops/s
 RandomDouble.threadLocal      thrpt    3  182857277,962 ± 8434544,009  ops/s
+
+JDK 17 - desktop 4+4 cores
+Benchmark                      Mode  Cnt          Score         Error  Units
+RandomDouble.mathRandom       thrpt    3   66751109,009 ±  188318,277  ops/s
+RandomDouble.randomObj        thrpt    3   66712586,978 ± 1047898,826  ops/s
+RandomDouble.secureRandomObj  thrpt    3     691958,587 ±   23782,281  ops/s
+RandomDouble.threadLocal      thrpt    3  202124811,564 ± 9384074,291  ops/s
+
+JDK 18-ea+26 - desktop 4+4 cores
+Benchmark                      Mode  Cnt          Score           Error  Units
+RandomDouble.mathRandom       thrpt    3   66626779,637 ±    855351,948  ops/s
+RandomDouble.randomObj        thrpt    3   66095950,988 ±  20344036,953  ops/s
+RandomDouble.secureRandomObj  thrpt    3     703243,657 ±     25417,227  ops/s
+RandomDouble.threadLocal      thrpt    3  188972688,905 ± 386342506,494  ops/s
 */

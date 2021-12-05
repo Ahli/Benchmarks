@@ -76,7 +76,7 @@ public class ToArray {
 	}
 }
 /*
-JDK 17 - laptop 12 cores
+JDK 17 - laptop 6+6 cores
 Benchmark                (N)   Mode  Cnt          Score          Error  Units
 ToArray.emptyArray         1  thrpt    3   45171359,704 ±  3136610,804  ops/s
 ToArray.emptyArray        10  thrpt    3   36219163,913 ±  2094975,023  ops/s
@@ -90,6 +90,21 @@ ToArray.sizedArray         1  thrpt    3   47141587,950 ±  2785563,991  ops/s
 ToArray.sizedArray        10  thrpt    3   36519212,175 ±  4637641,192  ops/s
 ToArray.sizedArray       100  thrpt    3   12585969,675 ±   546365,287  ops/s
 ToArray.sizedArray  10000000  thrpt    3         40,702 ±        7,521  ops/s
+
+JDK 18-ea+26 - desktop 4+4 cores
+Benchmark                (N)   Mode  Cnt          Score          Error  Units
+ToArray.emptyArray         1  thrpt    3   49860947,326 ±  4207343,179  ops/s
+ToArray.emptyArray        10  thrpt    3   40933802,915 ± 10921256,238  ops/s
+ToArray.emptyArray       100  thrpt    3   13828061,092 ±  1825795,721  ops/s
+ToArray.emptyArray  10000000  thrpt    3         51,506 ±        4,660  ops/s
+ToArray.index              1  thrpt    3  126625273,186 ± 90711496,153  ops/s
+ToArray.index             10  thrpt    3   36565464,527 ± 52321173,862  ops/s
+ToArray.index            100  thrpt    3    4280695,582 ±  3384695,635  ops/s
+ToArray.index       10000000  thrpt    3         15,392 ±        0,590  ops/s
+ToArray.sizedArray         1  thrpt    3   50572093,428 ± 18828828,747  ops/s
+ToArray.sizedArray        10  thrpt    3   39607076,285 ± 10604352,030  ops/s
+ToArray.sizedArray       100  thrpt    3   13489477,500 ±   514873,030  ops/s
+ToArray.sizedArray  10000000  thrpt    3         51,677 ±        5,910  ops/s
 
 https://shipilev.net/blog/2016/arrays-wisdom-ancients/
 => use zero array instead of sized array

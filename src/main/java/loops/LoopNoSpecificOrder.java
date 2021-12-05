@@ -185,7 +185,7 @@ public class LoopNoSpecificOrder {
 }
 
 /*
-JDK 16.0.2
+JDK 16.0.2 - laptop 6+6 cores
 Benchmark                                                           (N)   Mode  Cnt          Score          Error  Units
 LoopNoSpecificOrder.collectionForEach                                 1  thrpt    3  203402703,396 ±  9909232,654  ops/s
 LoopNoSpecificOrder.collectionForEach                                10  thrpt    3   25723081,359 ±   744434,520  ops/s
