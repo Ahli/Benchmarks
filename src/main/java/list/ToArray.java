@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Warmup(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = { "-Xms2G", "-Xmx2G" })
 @Threads(1)
 @BenchmarkMode(Mode.Throughput)
@@ -66,6 +66,12 @@ public class ToArray {
 	}
 	
 	@Benchmark
+	public void methodRef(final Blackhole bh) {
+		final Integer[] array = DATA_FOR_TESTING.toArray(Integer[]::new);
+		bh.consume(array);
+	}
+	
+	@Benchmark
 	public void index(final Blackhole bh) {
 		final int len = DATA_FOR_TESTING.size();
 		final Integer[] array = new Integer[len];
@@ -91,20 +97,45 @@ ToArray.sizedArray        10  thrpt    3   36519212,175 ±  4637641,192  ops/s
 ToArray.sizedArray       100  thrpt    3   12585969,675 ±   546365,287  ops/s
 ToArray.sizedArray  10000000  thrpt    3         40,702 ±        7,521  ops/s
 
+JDK 17.0.1 - desktop 4+4 cores
+Benchmark                (N)   Mode  Cnt          Score        Error  Units
+ToArray.emptyArray         1  thrpt   10   49795303,644 ± 429157,156  ops/s
+ToArray.emptyArray        10  thrpt   10   40409156,884 ± 196476,378  ops/s
+ToArray.emptyArray       100  thrpt   10   14194002,960 ±  69904,385  ops/s
+ToArray.emptyArray  10000000  thrpt   10         53,597 ±      1,612  ops/s
+ToArray.index              1  thrpt   10  131221810,439 ± 652872,122  ops/s
+ToArray.index             10  thrpt   10   37369697,750 ± 262529,236  ops/s
+ToArray.index            100  thrpt   10    4274385,774 ±  14648,788  ops/s
+ToArray.index       10000000  thrpt   10         14,981 ±      0,310  ops/s
+ToArray.methodRef          1  thrpt   10   49842526,161 ± 342413,535  ops/s
+ToArray.methodRef         10  thrpt   10   40495974,410 ± 250730,768  ops/s
+ToArray.methodRef        100  thrpt   10   14159500,854 ±  93439,917  ops/s
+ToArray.methodRef   10000000  thrpt   10         53,426 ±      2,404  ops/s
+ToArray.sizedArray         1  thrpt   10   51828857,433 ± 453681,215  ops/s
+ToArray.sizedArray        10  thrpt   10   40727396,095 ± 224975,697  ops/s
+ToArray.sizedArray       100  thrpt   10   13593907,058 ± 107273,725  ops/s
+ToArray.sizedArray  10000000  thrpt   10         51,937 ±      3,987  ops/s
+
 JDK 18-ea+26 - desktop 4+4 cores
-Benchmark                (N)   Mode  Cnt          Score          Error  Units
-ToArray.emptyArray         1  thrpt    3   49860947,326 ±  4207343,179  ops/s
-ToArray.emptyArray        10  thrpt    3   40933802,915 ± 10921256,238  ops/s
-ToArray.emptyArray       100  thrpt    3   13828061,092 ±  1825795,721  ops/s
-ToArray.emptyArray  10000000  thrpt    3         51,506 ±        4,660  ops/s
-ToArray.index              1  thrpt    3  126625273,186 ± 90711496,153  ops/s
-ToArray.index             10  thrpt    3   36565464,527 ± 52321173,862  ops/s
-ToArray.index            100  thrpt    3    4280695,582 ±  3384695,635  ops/s
-ToArray.index       10000000  thrpt    3         15,392 ±        0,590  ops/s
-ToArray.sizedArray         1  thrpt    3   50572093,428 ± 18828828,747  ops/s
-ToArray.sizedArray        10  thrpt    3   39607076,285 ± 10604352,030  ops/s
-ToArray.sizedArray       100  thrpt    3   13489477,500 ±   514873,030  ops/s
-ToArray.sizedArray  10000000  thrpt    3         51,677 ±        5,910  ops/s
+Benchmark                (N)   Mode  Cnt          Score         Error  Units
+ToArray.emptyArray         1  thrpt   10   50459842,678 ± 1328546,707  ops/s
+ToArray.emptyArray        10  thrpt   10   40493820,667 ±  821448,010  ops/s
+ToArray.emptyArray       100  thrpt   10   13952005,259 ±  108035,933  ops/s
+ToArray.emptyArray  10000000  thrpt   10         51,378 ±       1,202  ops/s
+ToArray.index              1  thrpt   10  126149846,699 ± 9077548,589  ops/s
+ToArray.index             10  thrpt   10   36225321,351 ± 3564847,201  ops/s
+ToArray.index            100  thrpt   10    4304031,161 ±  254725,994  ops/s
+ToArray.index       10000000  thrpt   10         15,385 ±       0,262  ops/s
+ToArray.methodRef          1  thrpt   10   50836204,036 ± 1346486,053  ops/s
+ToArray.methodRef         10  thrpt   10   40932973,395 ±  627791,881  ops/s
+ToArray.methodRef        100  thrpt   10   14053344,868 ±  159942,889  ops/s
+ToArray.methodRef   10000000  thrpt   10         51,143 ±       2,351  ops/s
+ToArray.sizedArray         1  thrpt   10   50558747,023 ± 1347605,524  ops/s
+ToArray.sizedArray        10  thrpt   10   39243103,991 ± 1063376,700  ops/s
+ToArray.sizedArray       100  thrpt   10   13578336,688 ±   49571,271  ops/s
+ToArray.sizedArray  10000000  thrpt   10         50,971 ±       2,989  ops/s
+
+
 
 https://shipilev.net/blog/2016/arrays-wisdom-ancients/
 => use zero array instead of sized array
