@@ -86,4 +86,11 @@ RandomInt.mathRandom       thrpt    3   66437283,645 ±   2419059,806  ops/s
 RandomInt.randomObj        thrpt    3  128654811,271 ±  75993215,491  ops/s
 RandomInt.secureRandomObj  thrpt    3    1395814,309 ±     56318,045  ops/s
 RandomInt.threadLocal      thrpt    3  258730797,850 ± 103217057,845  ops/s
+
+JDK 19.0.2 - desktop 4+4 cores - balanced cpu
+Benchmark                   Mode  Cnt          Score         Error  Units
+RandomInt.mathRandom       thrpt    3   57191706,070 ±  949277,185  ops/s
+RandomInt.randomObj        thrpt    3  117200219,409 ± 1346363,776  ops/s
+RandomInt.secureRandomObj  thrpt    3    1414867,595 ±   37765,751  ops/s
+RandomInt.threadLocal      thrpt    3  443603028,118 ± 7235275,032  ops/s
 */

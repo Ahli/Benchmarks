@@ -135,6 +135,24 @@ ToArray.sizedArray        10  thrpt   10   39243103,991 ± 1063376,700  ops/s
 ToArray.sizedArray       100  thrpt   10   13578336,688 ±   49571,271  ops/s
 ToArray.sizedArray  10000000  thrpt   10         50,971 ±       2,989  ops/s
 
+JDK 19.0.2 - desktop 4+4 cores - balanced cpu
+Benchmark                (N)   Mode  Cnt          Score         Error  Units
+ToArray.emptyArray         1  thrpt   10   56368834,253 ± 1184817,341  ops/s
+ToArray.emptyArray        10  thrpt   10   44722178,342 ±  404111,940  ops/s
+ToArray.emptyArray       100  thrpt   10   14559105,918 ±  176461,125  ops/s
+ToArray.emptyArray  10000000  thrpt   10         57,384 ±       4,279  ops/s
+ToArray.index              1  thrpt   10  178206033,304 ± 2302538,064  ops/s
+ToArray.index             10  thrpt   10   37393705,063 ±  401423,378  ops/s
+ToArray.index            100  thrpt   10    4749315,685 ±   75663,181  ops/s
+ToArray.index       10000000  thrpt   10         15,430 ±       0,715  ops/s
+ToArray.methodRef          1  thrpt   10   57541533,183 ±  577948,748  ops/s
+ToArray.methodRef         10  thrpt   10   45134819,638 ±  572269,036  ops/s
+ToArray.methodRef        100  thrpt   10   14342750,781 ±  368019,038  ops/s
+ToArray.methodRef   10000000  thrpt   10         56,005 ±       4,453  ops/s
+ToArray.sizedArray         1  thrpt   10   61368263,603 ±  822795,257  ops/s
+ToArray.sizedArray        10  thrpt   10   45590801,750 ±  567997,061  ops/s
+ToArray.sizedArray       100  thrpt   10   14328995,126 ±  118001,158  ops/s
+ToArray.sizedArray  10000000  thrpt   10         58,646 ±       3,486  ops/s
 
 
 https://shipilev.net/blog/2016/arrays-wisdom-ancients/

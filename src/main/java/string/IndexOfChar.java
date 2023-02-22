@@ -61,4 +61,11 @@ Benchmark                         Mode  Cnt          Score          Error  Units
 IndexOfChar.stringContains       thrpt    3  231105030,988 ±  3028295,129  ops/s
 IndexOfChar.stringIndexOfChar    thrpt    3  671552177,044 ± 25471593,411  ops/s
 IndexOfChar.stringIndexOfString  thrpt    3  238023856,555 ±  8498432,357  ops/s
+
+JDK 19.0.2 - desktop 4+4 cores - balanced cpu
+Benchmark                         Mode  Cnt          Score          Error  Units
+IndexOfChar.stringContains       thrpt    3  258370134,668 ±  2530471,236  ops/s
+IndexOfChar.stringIndexOfChar    thrpt    3  671175777,586 ± 47950436,449  ops/s
+IndexOfChar.stringIndexOfString  thrpt    3  238790873,426 ± 28001554,627  ops/s
+
  */

@@ -100,4 +100,10 @@ JDK 18-ea+26 - desktop 4+4 cores
 Benchmark               (N)   Mode  Cnt      Score      Error  Units
 UUIDCheck.parse        1000  thrpt    3  31115,779 ± 1285,629  ops/s
 UUIDCheck.singleRegex  1000  thrpt    3   2913,940 ± 3501,117  ops/s
+
+JDK 19.0.2 - desktop 4+4 cores - balanced cpu
+Benchmark               (N)   Mode  Cnt      Score      Error  Units
+UUIDCheck.parse        1000  thrpt    3  33804,665 ±  656,818  ops/s
+UUIDCheck.singleRegex  1000  thrpt    3   2925,839 ± 3127,967  ops/s
+
 */

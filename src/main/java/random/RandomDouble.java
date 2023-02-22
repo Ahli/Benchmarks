@@ -84,4 +84,11 @@ RandomDouble.mathRandom       thrpt    3   66626779,637 ±    855351,948  ops/s
 RandomDouble.randomObj        thrpt    3   66095950,988 ±  20344036,953  ops/s
 RandomDouble.secureRandomObj  thrpt    3     703243,657 ±     25417,227  ops/s
 RandomDouble.threadLocal      thrpt    3  188972688,905 ± 386342506,494  ops/s
+
+JDK 19.0.2 - desktop 4+4 cores - balanced cpu
+Benchmark                      Mode  Cnt          Score         Error  Units
+RandomDouble.mathRandom       thrpt    3   57228990,898 ± 1023769,680  ops/s
+RandomDouble.randomObj        thrpt    3   56922994,303 ± 1099680,491  ops/s
+RandomDouble.secureRandomObj  thrpt    3     705011,843 ±   25599,071  ops/s
+RandomDouble.threadLocal      thrpt    3  341162412,634 ± 3102598,699  ops/s
 */
