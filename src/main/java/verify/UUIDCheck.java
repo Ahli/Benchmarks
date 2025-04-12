@@ -106,4 +106,8 @@ Benchmark               (N)   Mode  Cnt      Score      Error  Units
 UUIDCheck.parse        1000  thrpt    3  33804,665 ±  656,818  ops/s
 UUIDCheck.singleRegex  1000  thrpt    3   2925,839 ± 3127,967  ops/s
 
+JDK-24 - Desktop 9800X3D highPerformance
+Benchmark               (N)   Mode  Cnt      Score     Error  Units
+UUIDCheck.parse        1000  thrpt    3  61222,697 ± 430,081  ops/s
+UUIDCheck.singleRegex  1000  thrpt    3   8410,822 ± 150,380  ops/s
 */

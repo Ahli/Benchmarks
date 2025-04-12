@@ -68,4 +68,9 @@ IndexOfChar.stringContains       thrpt    3  258370134,668 ±  2530471,236  ops/
 IndexOfChar.stringIndexOfChar    thrpt    3  671175777,586 ± 47950436,449  ops/s
 IndexOfChar.stringIndexOfString  thrpt    3  238790873,426 ± 28001554,627  ops/s
 
+JDK-24 - Desktop 9800X3D highPerformance
+Benchmark                         Mode  Cnt           Score          Error  Units
+IndexOfChar.stringContains       thrpt    3   363698431,940 ± 21331984,460  ops/s
+IndexOfChar.stringIndexOfChar    thrpt    3  1401255650,935 ± 24870481,360  ops/s
+IndexOfChar.stringIndexOfString  thrpt    3   374391447,816 ±  3235983,277  ops/s
  */

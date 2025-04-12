@@ -121,52 +121,26 @@ FilteredList.streamToList                             10  thrpt    3  12418396,9
 FilteredList.streamToList                            100  thrpt    3   2081558,570 ±   269245,968  ops/s
 FilteredList.streamToList                       10000000  thrpt    3        17,054 ±        1,261  ops/s
 
-JDK 18-ea+26 - desktop 4+4 cores
-Benchmark                                            (N)   Mode  Cnt         Score          Error  Units
-FilteredList.index                                     1  thrpt    3  91640238,270 ± 57384033,446  ops/s
-FilteredList.index                                    10  thrpt    3  33816426,355 ±  7226062,706  ops/s
-FilteredList.index                                   100  thrpt    3   2998374,026 ±   545464,181  ops/s
-FilteredList.index                              10000000  thrpt    3        16,698 ±        1,955  ops/s
-FilteredList.iterator                                  1  thrpt    3  87837358,469 ± 82884535,670  ops/s
-FilteredList.iterator                                 10  thrpt    3  27935108,245 ± 61737185,672  ops/s
-FilteredList.iterator                                100  thrpt    3   2937155,924 ±    63249,738  ops/s
-FilteredList.iterator                           10000000  thrpt    3        16,867 ±        3,131  ops/s
-FilteredList.streamCollectorToList                     1  thrpt    3  28994500,245 ± 33927733,118  ops/s
-FilteredList.streamCollectorToList                    10  thrpt    3  14900972,960 ±  9945051,531  ops/s
-FilteredList.streamCollectorToList                   100  thrpt    3   2088215,783 ±    67385,443  ops/s
-FilteredList.streamCollectorToList              10000000  thrpt    3        17,526 ±        1,253  ops/s
-FilteredList.streamCollectorToUnmodifiableList         1  thrpt    3  20128155,977 ± 10520006,413  ops/s
-FilteredList.streamCollectorToUnmodifiableList        10  thrpt    3  12172559,117 ±  6598067,872  ops/s
-FilteredList.streamCollectorToUnmodifiableList       100  thrpt    3   1841028,922 ±    42903,441  ops/s
-FilteredList.streamCollectorToUnmodifiableList  10000000  thrpt    3        15,625 ±        0,790  ops/s
-FilteredList.streamToList                              1  thrpt    3  18764041,319 ± 11920137,225  ops/s
-FilteredList.streamToList                             10  thrpt    3  13061681,080 ±   855521,872  ops/s
-FilteredList.streamToList                            100  thrpt    3   1973051,781 ±   632589,957  ops/s
-FilteredList.streamToList                       10000000  thrpt    3        16,449 ±        8,938  ops/s
-
-JDK 19.0.2 - desktop 4+4 cores - balanced cpu
-Benchmark                                            (N)   Mode  Cnt          Score          Error  Units
-FilteredList.index                                     1  thrpt    3   87122074,856 ± 74005948,930  ops/s
-FilteredList.index                                    10  thrpt    3   26938544,008 ±  2528900,145  ops/s
-FilteredList.index                                   100  thrpt    3    2457668,495 ±   143885,465  ops/s
-FilteredList.index                              10000000  thrpt    3         15,866 ±        2,742  ops/s
-FilteredList.iterator                                  1  thrpt    3  100577259,174 ±  2467381,355  ops/s
-FilteredList.iterator                                 10  thrpt    3   28611599,549 ±   153430,268  ops/s
-FilteredList.iterator                                100  thrpt    3    2627545,027 ±   175754,713  ops/s
-FilteredList.iterator                           10000000  thrpt    3         15,704 ±        1,549  ops/s
-FilteredList.streamCollectorToList                     1  thrpt    3   28588763,629 ±  1046750,848  ops/s
-FilteredList.streamCollectorToList                    10  thrpt    3   16337562,218 ±   184250,511  ops/s
-FilteredList.streamCollectorToList                   100  thrpt    3    1681277,844 ±   106860,103  ops/s
-FilteredList.streamCollectorToList              10000000  thrpt    3         14,869 ±        0,897  ops/s
-FilteredList.streamCollectorToUnmodifiableList         1  thrpt    3   18919025,430 ±  1282101,557  ops/s
-FilteredList.streamCollectorToUnmodifiableList        10  thrpt    3   11029412,038 ±   379997,224  ops/s
-FilteredList.streamCollectorToUnmodifiableList       100  thrpt    3    1546224,311 ±    24143,591  ops/s
-FilteredList.streamCollectorToUnmodifiableList  10000000  thrpt    3         13,381 ±        2,197  ops/s
-FilteredList.streamToList                              1  thrpt    3   20422821,728 ±   846936,585  ops/s
-FilteredList.streamToList                             10  thrpt    3   13279744,675 ±   598410,635  ops/s
-FilteredList.streamToList                            100  thrpt    3    1909367,810 ±   128577,685  ops/s
-FilteredList.streamToList                       10000000  thrpt    3         17,876 ±        3,939  ops/s
-
-Process finished with exit code 0
-
+JDK-24 - Desktop 9800X3D highPerformance
+Benchmark                                            (N)   Mode  Cnt          Score         Error  Units
+FilteredList.index                                     1  thrpt    3  229747938,472 ± 8883092,486  ops/s
+FilteredList.index                                    10  thrpt    3   73910678,784 ± 2933252,812  ops/s
+FilteredList.index                                   100  thrpt    3    6658519,801 ±  367847,245  ops/s
+FilteredList.index                              10000000  thrpt    3         31,651 ±       8,065  ops/s
+FilteredList.iterator                                  1  thrpt    3  190737242,979 ± 6355297,423  ops/s
+FilteredList.iterator                                 10  thrpt    3   57278213,622 ± 4020009,507  ops/s
+FilteredList.iterator                                100  thrpt    3    6789313,588 ±   35789,492  ops/s
+FilteredList.iterator                           10000000  thrpt    3         30,338 ±       2,094  ops/s
+FilteredList.streamCollectorToList                     1  thrpt    3   70872554,811 ± 1161881,210  ops/s
+FilteredList.streamCollectorToList                    10  thrpt    3   34873042,911 ± 7896343,233  ops/s
+FilteredList.streamCollectorToList                   100  thrpt    3    4400403,993 ±  242099,709  ops/s
+FilteredList.streamCollectorToList              10000000  thrpt    3         31,547 ±      17,942  ops/s
+FilteredList.streamCollectorToUnmodifiableList         1  thrpt    3   43965881,638 ± 1988624,028  ops/s
+FilteredList.streamCollectorToUnmodifiableList        10  thrpt    3   32034182,737 ± 4488363,153  ops/s
+FilteredList.streamCollectorToUnmodifiableList       100  thrpt    3    4186433,435 ±   99729,718  ops/s
+FilteredList.streamCollectorToUnmodifiableList  10000000  thrpt    3         28,790 ±       1,249  ops/s
+FilteredList.streamToList                              1  thrpt    3   39446643,748 ± 2280388,734  ops/s
+FilteredList.streamToList                             10  thrpt    3   34416972,082 ±  188797,407  ops/s
+FilteredList.streamToList                            100  thrpt    3    4956716,635 ± 1045895,473  ops/s
+FilteredList.streamToList                       10000000  thrpt    3         35,798 ±       4,763  ops/s
 */

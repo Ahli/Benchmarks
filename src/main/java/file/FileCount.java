@@ -38,8 +38,8 @@ import java.util.stream.Stream;
 @State(Scope.Benchmark)
 public class FileCount {
 	
-	//private final Path path = Path.of("C:\\projects\\GalaxyObsUi\\dev\\heroes\\AhliObs.StormInterface");
-	private final Path path = Path.of("D:\\GalaxyObsUi\\dev\\heroes\\AhliObs.StormInterface");
+	private final Path path = Path.of("D:\\projects\\Galaxy-Observer-UI\\dev\\heroes\\AhliObs.StormInterface");
+//	private final Path path = Path.of("D:\\GalaxyObsUi\\dev\\heroes\\AhliObs.StormInterface");
 	private final FileCountingVisitor reusableFileVisitor = new FileCountingVisitor();
 	
 	public static void main(final String[] args) throws RunnerException {
@@ -68,7 +68,7 @@ public class FileCount {
 	}
 	
 	private static long checkResult(final long val) {
-		if (val != 106) {
+		if (val != 107) {
 			throw new IllegalArgumentException("Wrong result! Received " + val);
 		}
 		return val;
@@ -128,7 +128,7 @@ public class FileCount {
 	}
 	
 	private static int checkResult(final int val) {
-		if (val != 106) {
+		if (val != 107) {
 			throw new IllegalArgumentException("Wrong result! Received " + val);
 		}
 		return val;
@@ -206,63 +206,18 @@ FileCount.walkParallelToFile2       thrpt    3  232,495 ±  11,099  ops/s
 FileCount.walkToFile                thrpt    3  218,120 ±  17,642  ops/s
 FileCount.walkToFile2               thrpt    3  217,200 ±  16,594  ops/s
 
-JDK-17 - desktop 4+4 cores
+JDK-24 - Desktop 9800X3D highPerformance
 Benchmark                            Mode  Cnt     Score     Error  Units
-FileCount.commonsList               thrpt    3   202,416 ±  55,389  ops/s
-FileCount.commonsListStream         thrpt    3   198,928 ±  45,240  ops/s
-FileCount.commonsListWithoutFilter  thrpt    3   212,674 ±  20,996  ops/s
-FileCount.fileListFiles             thrpt    3   306,973 ±  23,200  ops/s
-FileCount.fileVisitorNew            thrpt    3  1018,713 ±  26,616  ops/s
-FileCount.fileVisitorReuse          thrpt    3  1002,946 ± 137,545  ops/s
-FileCount.nioFiles                  thrpt    3   336,743 ±  47,296  ops/s
-FileCount.walkParallelNioFiles      thrpt    3   362,599 ±  42,196  ops/s
-FileCount.walkParallelToFile        thrpt    3   342,325 ±  30,531  ops/s
-FileCount.walkParallelToFile2       thrpt    3   345,580 ±  37,512  ops/s
-FileCount.walkToFile                thrpt    3   316,545 ±  19,916  ops/s
-FileCount.walkToFile2               thrpt    3   322,524 ±  15,077  ops/s
-
-JDK 18-ea+26 - desktop 4+4 cores
-Benchmark                            Mode  Cnt     Score     Error  Units
-FileCount.commonsList               thrpt    3   185,779 ± 104,183  ops/s
-FileCount.commonsListStream         thrpt    3   197,667 ±  42,522  ops/s
-FileCount.commonsListWithoutFilter  thrpt    3   211,115 ±  13,087  ops/s
-FileCount.fileListFiles             thrpt    3   300,536 ±   9,023  ops/s
-FileCount.fileVisitorNew            thrpt    3  1001,923 ± 123,345  ops/s
-FileCount.fileVisitorReuse          thrpt    3  1009,001 ±  43,050  ops/s
-FileCount.nioFiles                  thrpt    3   335,463 ±  60,877  ops/s
-FileCount.walkParallelNioFiles      thrpt    3   360,747 ±  78,603  ops/s
-FileCount.walkParallelToFile        thrpt    3   341,309 ±  36,202  ops/s
-FileCount.walkParallelToFile2       thrpt    3   345,039 ±  40,918  ops/s
-FileCount.walkToFile                thrpt    3   317,564 ±   7,350  ops/s
-FileCount.walkToFile2               thrpt    3   319,553 ±   5,329  ops/s
-
-JDK 18.0.2.1 - desktop 4+4 cores - balanced cpu
-Benchmark                            Mode  Cnt     Score     Error  Units
-FileCount.commonsList               thrpt    3   182,386 ±  81,562  ops/s
-FileCount.commonsListStream         thrpt    3   184,167 ±  49,093  ops/s
-FileCount.commonsListWithoutFilter  thrpt    3   203,298 ±  17,290  ops/s
-FileCount.fileListFiles             thrpt    3   292,470 ±   6,293  ops/s
-FileCount.fileVisitorNew            thrpt    3   989,957 ±  36,133  ops/s
-FileCount.fileVisitorReuse          thrpt    3  1009,643 ± 145,371  ops/s
-FileCount.nioFiles                  thrpt    3   313,640 ±  73,673  ops/s
-FileCount.walkParallelNioFiles      thrpt    3   341,984 ±  67,899  ops/s
-FileCount.walkParallelToFile        thrpt    3   323,575 ±  59,053  ops/s
-FileCount.walkParallelToFile2       thrpt    3   322,039 ±  35,663  ops/s
-FileCount.walkToFile                thrpt    3   303,592 ±   7,760  ops/s
-FileCount.walkToFile2               thrpt    3   302,763 ±   9,321  ops/s
-
-JDK 19.0.2 - desktop 4+4 cores - balanced cpu
-Benchmark                            Mode  Cnt     Score    Error  Units
-FileCount.commonsList               thrpt    3    63,371 ± 33,371  ops/s
-FileCount.commonsListStream         thrpt    3    65,016 ±  3,412  ops/s
-FileCount.commonsListWithoutFilter  thrpt    3   102,598 ±  8,126  ops/s
-FileCount.fileListFiles             thrpt    3   121,203 ± 48,474  ops/s
-FileCount.fileVisitorNew            thrpt    3  1013,030 ± 29,474  ops/s
-FileCount.fileVisitorReuse          thrpt    3  1039,878 ± 13,825  ops/s
-FileCount.nioFiles                  thrpt    3   125,676 ±  2,749  ops/s
-FileCount.walkParallelNioFiles      thrpt    3   359,246 ± 38,702  ops/s
-FileCount.walkParallelToFile        thrpt    3   353,187 ± 45,692  ops/s
-FileCount.walkParallelToFile2       thrpt    3   353,752 ± 44,418  ops/s
-FileCount.walkToFile                thrpt    3   123,300 ±  9,472  ops/s
-FileCount.walkToFile2               thrpt    3   122,743 ±  5,391  ops/s
+FileCount.commonsList               thrpt    3   233,558 ±  16,220  ops/s
+FileCount.commonsListStream         thrpt    3   232,402 ±  15,965  ops/s
+FileCount.commonsListWithoutFilter  thrpt    3   293,479 ±  21,683  ops/s
+FileCount.fileListFiles             thrpt    3   436,419 ±   9,180  ops/s
+FileCount.fileVisitorNew            thrpt    3  1729,877 ± 131,918  ops/s
+FileCount.fileVisitorReuse          thrpt    3  1708,454 ±  26,471  ops/s
+FileCount.nioFiles                  thrpt    3   493,156 ±  22,014  ops/s
+FileCount.walkParallelNioFiles      thrpt    3  1096,457 ±  19,988  ops/s
+FileCount.walkParallelToFile        thrpt    3  1089,594 ±  55,237  ops/s
+FileCount.walkParallelToFile2       thrpt    3  1073,747 ± 517,849  ops/s
+FileCount.walkToFile                thrpt    3   475,423 ± 178,759  ops/s
+FileCount.walkToFile2               thrpt    3   479,015 ±  25,938  ops/s
 */
