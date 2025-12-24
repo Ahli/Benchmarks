@@ -73,4 +73,16 @@ Benchmark                         Mode  Cnt           Score          Error  Unit
 IndexOfChar.stringContains       thrpt    3   363698431,940 ± 21331984,460  ops/s
 IndexOfChar.stringIndexOfChar    thrpt    3  1401255650,935 ± 24870481,360  ops/s
 IndexOfChar.stringIndexOfString  thrpt    3   374391447,816 ±  3235983,277  ops/s
+
+JDK-25 - Desktop 9800X3D balanced
+Benchmark                         Mode  Cnt           Score         Error  Units
+IndexOfChar.stringContains       thrpt    3   370763057,120 ± 4701362,700  ops/s
+IndexOfChar.stringIndexOfChar    thrpt    3  1449530913,662 ± 6381276,358  ops/s
+IndexOfChar.stringIndexOfString  thrpt    3   381673539,912 ± 2460786,384  ops/s
+
+JDK-21.0.8 - Desktop 9800X3D balanced
+Benchmark                         Mode  Cnt           Score          Error  Units
+IndexOfChar.stringContains       thrpt    3   374589268,725 ±  4468805,196  ops/s
+IndexOfChar.stringIndexOfChar    thrpt    3  1426199673,027 ± 13356383,758  ops/s
+IndexOfChar.stringIndexOfString  thrpt    3   372405335,998 ±  3800542,179  ops/s
  */

@@ -115,4 +115,34 @@ VersusArrayListForStringKey.mapAccess          3  thrpt    3   92325570,290 ±  
 VersusArrayListForStringKey.mapAccess          4  thrpt    3   65725432,514 ±   2464219,117  ops/s
 VersusArrayListForStringKey.mapAccess          5  thrpt    3   55696910,297 ±   2372633,820  ops/s
 VersusArrayListForStringKey.mapAccess         10  thrpt    3   28108198,095 ±   1237553,372  ops/s
+
+JDK-25 - Desktop 9800X3D balanced
+Benchmark                                    (N)   Mode  Cnt          Score          Error  Units
+VersusArrayListForStringKey.arrayListSearch    1  thrpt    3  369929921,706 ± 70480632,885  ops/s
+VersusArrayListForStringKey.arrayListSearch    2  thrpt    3  124278461,547 ±  3369074,359  ops/s
+VersusArrayListForStringKey.arrayListSearch    3  thrpt    3   77187625,613 ±  1780594,515  ops/s
+VersusArrayListForStringKey.arrayListSearch    4  thrpt    3   51435089,196 ±   483176,517  ops/s
+VersusArrayListForStringKey.arrayListSearch    5  thrpt    3   37880065,977 ±    94423,307  ops/s
+VersusArrayListForStringKey.arrayListSearch   10  thrpt    3   12658843,156 ±   140106,733  ops/s
+VersusArrayListForStringKey.mapAccess          1  thrpt    3  214307543,376 ±   820691,309  ops/s
+VersusArrayListForStringKey.mapAccess          2  thrpt    3  119887139,171 ± 27808885,552  ops/s
+VersusArrayListForStringKey.mapAccess          3  thrpt    3   82341576,924 ±  3543146,471  ops/s
+VersusArrayListForStringKey.mapAccess          4  thrpt    3   64063078,081 ±  1013139,816  ops/s
+VersusArrayListForStringKey.mapAccess          5  thrpt    3   51794688,286 ±   826781,677  ops/s
+VersusArrayListForStringKey.mapAccess         10  thrpt    3   26563284,706 ±   622789,436  ops/s
+
+JDK-21.0.8 - Desktop 9800X3D balanced
+Benchmark                                    (N)   Mode  Cnt          Score          Error  Units
+VersusArrayListForStringKey.arrayListSearch    1  thrpt    3  290540450,897 ±   901434,748  ops/s
+VersusArrayListForStringKey.arrayListSearch    2  thrpt    3  117150804,137 ±  2118924,671  ops/s
+VersusArrayListForStringKey.arrayListSearch    3  thrpt    3   74440079,377 ±  3275839,585  ops/s
+VersusArrayListForStringKey.arrayListSearch    4  thrpt    3   50368944,306 ±    91443,633  ops/s
+VersusArrayListForStringKey.arrayListSearch    5  thrpt    3   38568777,952 ±   800645,414  ops/s
+VersusArrayListForStringKey.arrayListSearch   10  thrpt    3   11979666,758 ±   155540,194  ops/s
+VersusArrayListForStringKey.mapAccess          1  thrpt    3  174486295,677 ± 51892173,073  ops/s
+VersusArrayListForStringKey.mapAccess          2  thrpt    3  101648630,145 ± 14682408,105  ops/s
+VersusArrayListForStringKey.mapAccess          3  thrpt    3   72355443,176 ±  1083788,853  ops/s
+VersusArrayListForStringKey.mapAccess          4  thrpt    3   54338353,698 ±  1134971,495  ops/s
+VersusArrayListForStringKey.mapAccess          5  thrpt    3   43743067,475 ±   921651,196  ops/s
+VersusArrayListForStringKey.mapAccess         10  thrpt    3   22929995,077 ±   573996,769  ops/s
 */

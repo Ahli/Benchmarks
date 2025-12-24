@@ -79,4 +79,18 @@ RandomInt.mathRandom       thrpt    3  130802956,577 ±  2496949,077  ops/s
 RandomInt.randomObj        thrpt    3  267421825,619 ± 17037313,937  ops/s
 RandomInt.secureRandomObj  thrpt    3    4740733,525 ±   231858,395  ops/s
 RandomInt.threadLocal      thrpt    3  715078639,448 ± 11157311,769  ops/s
+
+JDK-25 - Desktop 9800X3D balanced
+Benchmark                   Mode  Cnt          Score          Error  Units
+RandomInt.mathRandom       thrpt    3  132956876,476 ±  1793340,798  ops/s
+RandomInt.randomObj        thrpt    3  275124062,233 ±  1274763,114  ops/s
+RandomInt.secureRandomObj  thrpt    3    4803593,994 ±  1068952,786  ops/s
+RandomInt.threadLocal      thrpt    3  748156113,585 ± 42068993,875  ops/s
+
+JDK-21.0.8 - Desktop 9800X3D balanced
+Benchmark                   Mode  Cnt          Score         Error  Units
+RandomInt.mathRandom       thrpt    3  133803755,243 ± 1947048,405  ops/s
+RandomInt.randomObj        thrpt    3  274739892,196 ± 2439657,975  ops/s
+RandomInt.secureRandomObj  thrpt    3    4817021,019 ±  213035,910  ops/s
+RandomInt.threadLocal      thrpt    3  796900163,879 ± 1747980,662  ops/s
 */
